@@ -1,0 +1,52 @@
+# Project information
+site_name: 'iHRIS 4.3 Documentation'
+site_description: 'Installation and administration documentation for iHRIS 4.3 (Manage, Qualify and Train)'
+site_author: 'IntraHealth International'
+site_url: 'https://ihris.github.io/ihris-4-documentation/'
+
+# Repository
+repo_name: 'iHRIS/ihris-4-documentation'
+repo_url: 'https://github.com/iHRIS/ihris-4-documentation'
+edit_uri: 'edit/main/docs/'
+
+# Copyright
+copyright: 'Copyright &copy; 2026 IntraHealth International'
+
+# Theme
+theme:
+  name: 'material'
+  palette:
+    primary: 'indigo'
+    accent: 'blue'
+  language: 'en'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  features:
+    - navigation.tabs
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Installation:
+      - install_ubuntu.md
+  - iHRIS 5: https://ihris.github.io/ihris-documentation/
+
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/iHRIS/ihris-4-documentation
