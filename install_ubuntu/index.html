@@ -1,0 +1,1602 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Installation and administration documentation for iHRIS 4.3 (Manage, Qualify and Train)">
+      
+      
+        <meta name="author" content="IntraHealth International">
+      
+      
+        <link rel="canonical" href="https://ihris.github.io/ihris-4-documentation/install_ubuntu/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Installing iHRIS 4.3.4 on Ubuntu - iHRIS 4.3 Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installing-ihris-434-on-ubuntu" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="iHRIS 4.3 Documentation" class="md-header__button md-logo" aria-label="iHRIS 4.3 Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iHRIS 4.3 Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Installing iHRIS 4.3.4 on Ubuntu
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iHRIS/ihris-4-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS/ihris-4-documentation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Installation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://ihris.github.io/ihris-documentation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  iHRIS 5
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="iHRIS 4.3 Documentation" class="md-nav__button md-logo" aria-label="iHRIS 4.3 Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    iHRIS 4.3 Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iHRIS/ihris-4-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS/ihris-4-documentation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installing iHRIS 4.3.4 on Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installing iHRIS 4.3.4 on Ubuntu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-php-version-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which PHP version to use
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-install-php-and-apache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Install PHP and Apache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-install-mysql-and-set-the-root-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Install MySQL and set the root password
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-configure-mysql-for-ihris" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Configure MySQL for iHRIS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-php-extensions-apcu-memcached-and-opcache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: PHP extensions, APCu, memcached and OPcache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-configure-apache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Configure Apache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-get-the-ihris-434-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Get the iHRIS 4.3.4 code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 6: Get the iHRIS 4.3.4 code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-bazaar-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Bazaar (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-release-tarballs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: release tarballs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#then-for-either-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Then, for either option
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-install-an-ihris-site-blank-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Install an iHRIS site (blank site)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-an-existing-site-to-434" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading an existing site to 4.3.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-ihris-in-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running iHRIS in production
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coming-from-the-ubuntu-1804-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming from the Ubuntu 18.04 guide?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ihris.github.io/ihris-documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iHRIS 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-php-version-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which PHP version to use
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-install-php-and-apache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Install PHP and Apache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-install-mysql-and-set-the-root-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Install MySQL and set the root password
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-configure-mysql-for-ihris" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Configure MySQL for iHRIS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-php-extensions-apcu-memcached-and-opcache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: PHP extensions, APCu, memcached and OPcache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-configure-apache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Configure Apache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-get-the-ihris-434-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Get the iHRIS 4.3.4 code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 6: Get the iHRIS 4.3.4 code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-bazaar-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Bazaar (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-release-tarballs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: release tarballs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#then-for-either-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Then, for either option
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-install-an-ihris-site-blank-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Install an iHRIS site (blank site)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-an-existing-site-to-434" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upgrading an existing site to 4.3.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-ihris-in-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running iHRIS in production
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coming-from-the-ubuntu-1804-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming from the Ubuntu 18.04 guide?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="installing-ihris-434-on-ubuntu">Installing iHRIS 4.3.4 on Ubuntu<a class="headerlink" href="#installing-ihris-434-on-ubuntu" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This guide installs iHRIS 4.3.4 (Manage, Qualify or Train) on Ubuntu with <strong>Apache 2.4</strong>, <strong>MySQL 8</strong> and <strong>PHP</strong>. iHRIS 4.3.4 runs on <strong>PHP 7.2 to 8.5</strong>, so the steps work on any recent Ubuntu LTS release.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>The commands use PHP 8.3.</strong> If you use another PHP version, replace <code>8.3</code> with it everywhere: <code>php8.4-gd</code> instead of <code>php8.3-gd</code>, <code>/etc/php/8.4/</code> instead of <code>/etc/php/8.3/</code>, and so on. <code>php -v</code> shows which version you have.</p>
+</div>
+<h3 id="which-php-version-to-use">Which PHP version to use<a class="headerlink" href="#which-php-version-to-use" title="Permanent link">&para;</a></h3>
+<p>Use <strong>PHP 8.3 or later</strong>. Older versions run iHRIS 4.3.4 but are not recommended, because they no longer get security fixes. When a security flaw is found in an unsupported PHP version, it is published but never fixed, so anyone can use it to attack servers still running that version.</p>
+<table>
+<thead>
+<tr>
+<th>PHP</th>
+<th>Security fixes from the PHP project until</th>
+<th>Use it?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.2 to 8.1</td>
+<td>Already ended</td>
+<td>No</td>
+</tr>
+<tr>
+<td>8.2</td>
+<td>31 Dec 2026</td>
+<td>No, support ends soon</td>
+</tr>
+<tr>
+<td>8.3</td>
+<td>31 Dec 2027</td>
+<td>Yes (used in this guide)</td>
+</tr>
+<tr>
+<td>8.4</td>
+<td>31 Dec 2028</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td>31 Dec 2029</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Dates from <a href="https://www.php.net/supported-versions.php">PHP supported versions</a>. Ubuntu keeps patching the PHP version it ships for as long as that Ubuntu release is supported, but a newer PHP is still the safer choice.</p>
+<table>
+<thead>
+<tr>
+<th>Ubuntu release</th>
+<th>PHP it ships</th>
+<th>MySQL it ships</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22.04 LTS</td>
+<td>8.1</td>
+<td>8.0</td>
+</tr>
+<tr>
+<td>24.04 LTS</td>
+<td>8.3</td>
+<td>8.0</td>
+</tr>
+<tr>
+<td>26.04 LTS</td>
+<td>8.5</td>
+<td>8.4</td>
+</tr>
+</tbody>
+</table>
+<p>To use a PHP version your Ubuntu release doesn't ship (for example PHP 8.3 on 22.04), see Step 1.</p>
+<p><strong>Tested:</strong> iHRIS Manage, Qualify and Train 4.3.4 passed a full test run on PHP 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4 and 8.5, with MySQL 8.0 on Ubuntu 24.04. MySQL 8.4 (Ubuntu 26.04) has not been tested yet.</p>
+<h2 id="step-1-install-php-and-apache">Step 1: Install PHP and Apache<a class="headerlink" href="#step-1-install-php-and-apache" title="Permanent link">&para;</a></h2>
+<p>Installing PHP also installs Apache and the Apache PHP module (<code>libapache2-mod-php8.3</code>). Install the MySQL driver at the same time, since iHRIS connects to MySQL through PDO:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>php8.3<span class="w"> </span>php8.3-mysql
+</code></pre></div>
+<p>If <code>apt</code> says it can't find the package, your Ubuntu release doesn't ship that PHP version. Add the <a href="https://launchpad.net/~ondrej/+archive/ubuntu/php">Ondřej Surý PHP repository</a>, which packages every PHP version from 5.6 to 8.5 for Ubuntu, then run the install again:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common
+sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:ondrej/php
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>php8.3<span class="w"> </span>php8.3-mysql
+</code></pre></div>
+<p>Check the version:</p>
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span>-v<span class="w">      </span><span class="c1"># PHP 8.3.x</span>
+</code></pre></div>
+<p>If more than one PHP version is installed, make sure Apache and the command line use the same one: <code>sudo update-alternatives --set php /usr/bin/php8.3</code>, and enable only that version's Apache module (<code>sudo a2dismod php8.1 &amp;&amp; sudo a2enmod php8.3</code>).</p>
+<p><strong>Optional: email.</strong> iHRIS sends email (for example, password resets) through the server's mail system. If you need it, install Postfix:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postfix
+sudo<span class="w"> </span>dpkg-reconfigure<span class="w"> </span>postfix
+</code></pre></div>
+<h2 id="step-2-install-mysql-and-set-the-root-password">Step 2: Install MySQL and set the root password<a class="headerlink" href="#step-2-install-mysql-and-set-the-root-password" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mysql-server
+sudo<span class="w"> </span>mysql_secure_installation
+</code></pre></div>
+<p>On Ubuntu, MySQL's <code>root</code> user logs in through the system account (<code>auth_socket</code>), not a password. iHRIS and most PHP tools need a password, so set one:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mysql
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'root'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">caching_sha2_password</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'YourStrongPassword'</span><span class="p">;</span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+<span class="n">EXIT</span><span class="p">;</span>
+</code></pre></div>
+<p>From now on, log in with <code>mysql -u root -p</code>. Plain <code>sudo mysql</code> no longer works.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Password policy.</strong> If <code>mysql_secure_installation</code> turned on password validation, a weak password is rejected with <code>ERROR 1819 … does not satisfy the current policy requirements</code>. Use a stronger password. On a local test machine only, you can remove the policy instead: <code>UNINSTALL COMPONENT 'file://component_validate_password';</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>PHP 7.2 or 7.3 only.</strong> These versions can't log in with <code>caching_sha2_password</code>, MySQL's default; the site fails with <code>SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client</code>. Use <code>IDENTIFIED WITH mysql_native_password</code> for the iHRIS database user in Step 7 instead. On MySQL 8.4 (Ubuntu 26.04) that method is turned off by default: add <code>mysql_native_password = ON</code> under <code>[mysqld]</code> in <code>/etc/mysql/mysql.conf.d/ihris.cnf</code> (Step 3). PHP 7.4 and later work with the default.</p>
+</div>
+<h2 id="step-3-configure-mysql-for-ihris">Step 3: Configure MySQL for iHRIS<a class="headerlink" href="#step-3-configure-mysql-for-ihris" title="Permanent link">&para;</a></h2>
+<p>iHRIS needs a few MySQL settings. Set them in separate files under <code>/etc/mysql/mysql.conf.d/</code>, so MySQL upgrades don't overwrite them.</p>
+<p><strong>1. Remove any query cache settings.</strong> MySQL 8 has no query cache, and <strong>MySQL will not start</strong> if <code>query_cache_limit</code> or <code>query_cache_size</code> is set. If either appears in <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code>, comment it out:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/^query_cache_/# removed in MySQL 8.0: query_cache_/'</span><span class="w"> </span>/etc/mysql/mysql.conf.d/mysqld.cnf
+</code></pre></div>
+<p><strong>2. Set the sql-mode.</strong> Create <code>/etc/mysql/mysql.conf.d/sql-mode.cnf</code>. Don't add <code>NO_AUTO_CREATE_USER</code>: MySQL 8 removed it and won't start with it.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/mysql/mysql.conf.d/sql-mode.cnf
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">sql-mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"</span>
+</code></pre></div>
+<p><strong>3. Allow iHRIS to create database functions.</strong> iHRIS creates MySQL functions while it installs. Put the setting in a config file, so it survives MySQL restarts:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/mysql/mysql.conf.d/ihris.cnf
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="na">log_bin_trust_function_creators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+</code></pre></div>
+<p><strong>4. Restart MySQL and check the settings:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mysql
+mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">"SELECT @@sql_mode, @@log_bin_trust_function_creators;"</span>
+</code></pre></div>
+<p>Expected output: <code>ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</code> and <code>1</code>.</p>
+<h2 id="step-4-php-extensions-apcu-memcached-and-opcache">Step 4: PHP extensions, APCu, memcached and OPcache<a class="headerlink" href="#step-4-php-extensions-apcu-memcached-and-opcache" title="Permanent link">&para;</a></h2>
+<p><strong>1. PHP extensions.</strong> Use the versioned <code>php8.3-*</code> names for your PHP version. <code>php-pear</code> and <code>php-text-password</code> keep their generic names:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>php-pear<span class="w"> </span>php8.3-gd<span class="w"> </span>php8.3-tidy<span class="w"> </span>php8.3-intl<span class="w"> </span>php8.3-bcmath<span class="w"> </span>php-text-password<span class="w"> </span>php8.3-mbstring<span class="w"> </span>php8.3-uuid<span class="w"> </span>php8.3-zip
+</code></pre></div>
+<p><strong>2. APCu</strong> (in-memory cache):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>php8.3-apcu
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/php/8.3/mods-available/apcu.ini
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="na">extension</span><span class="o">=</span><span class="s">apcu.so</span>
+<span class="na">apc.enabled</span><span class="o">=</span><span class="s">1</span>
+<span class="na">apc.write_lock</span><span class="o">=</span><span class="s">1</span>
+<span class="na">apc.shm_size</span><span class="o">=</span><span class="s">100M</span>
+<span class="na">apc.slam_defense</span><span class="o">=</span><span class="s">0</span>
+<span class="na">apc.enable_cli</span><span class="o">=</span><span class="s">1</span>
+</code></pre></div>
+<p><strong>3. Memcached.</strong> Install it, then make sure the service is running and starts at boot:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>php8.3-memcached<span class="w"> </span>memcached
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>memcached
+</code></pre></div>
+<p><strong>4. OPcache.</strong> Edit <code>/etc/php/8.3/mods-available/opcache.ini</code>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/php/8.3/mods-available/opcache.ini
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="na">zend_extension</span><span class="o">=</span><span class="s">opcache.so</span>
+<span class="na">opcache.jit</span><span class="o">=</span><span class="s">off</span>
+<span class="na">opcache.memory_consumption</span><span class="o">=</span><span class="s">128M</span>
+<span class="na">opcache.interned_strings_buffer</span><span class="o">=</span><span class="s">8</span>
+<span class="na">opcache.max_accelerated_files</span><span class="o">=</span><span class="s">4000</span>
+<span class="na">opcache.revalidate_freq</span><span class="o">=</span><span class="s">60</span>
+<span class="na">opcache.enable_cli</span><span class="o">=</span><span class="s">1</span>
+</code></pre></div>
+<p>For a development machine, use <code>opcache.revalidate_freq=2</code>, so code changes show up within 2 seconds.</p>
+<p><strong>5. Timezone.</strong> PHP uses UTC unless told otherwise, so printed reports, report timestamps and cache times don't match local time. Set your timezone in both <code>php.ini</code> files (Apache and command line):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s#^;\?date.timezone =.*#date.timezone = Africa/Dar_es_Salaam#'</span><span class="w"> </span>/etc/php/8.3/apache2/php.ini<span class="w"> </span>/etc/php/8.3/cli/php.ini
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+php<span class="w"> </span>-r<span class="w"> </span><span class="s1">'echo date_default_timezone_get(), PHP_EOL;'</span>
+</code></pre></div>
+<p>The example uses <code>Africa/Dar_es_Salaam</code>; replace it with your zone from the <a href="https://www.php.net/manual/en/timezones.php">PHP timezone list</a>. The last command prints the zone PHP now uses.</p>
+<h2 id="step-5-configure-apache">Step 5: Configure Apache<a class="headerlink" href="#step-5-configure-apache" title="Permanent link">&para;</a></h2>
+<p>Enable the rewrite module:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>a2enmod<span class="w"> </span>rewrite
+</code></pre></div>
+<p>Allow <code>.htaccess</code> files under <code>/var/www</code>. Edit <code>/etc/apache2/apache2.conf</code> and change the <code>&lt;Directory /var/www/&gt;</code> block to:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/apache2/apache2.conf
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Directory</span><span class="w"> </span><span class="s">/var/www/</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nb">Options</span><span class="w"> </span>Indexes<span class="w"> </span>FollowSymLinks<span class="w"> </span>MultiViews
+<span class="w">    </span><span class="nb">AllowOverride</span><span class="w"> </span><span class="k">All</span>
+<span class="w">    </span><span class="nb">Require</span><span class="w"> </span><span class="k">all</span><span class="w"> </span>granted
+<span class="nt">&lt;/Directory&gt;</span>
+</code></pre></div>
+<p>Check the configuration, then restart Apache and memcached:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apache2ctl<span class="w"> </span>configtest<span class="w">      </span><span class="c1"># must print "Syntax OK"</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>memcached
+</code></pre></div>
+<p>The web root is <code>/var/www/html</code>. That's where the iHRIS installation creates its symlinks.</p>
+<h2 id="verification-checklist">Verification checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<p>Run these before installing iHRIS. Each should give the expected result.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># PHP version and extensions</span>
+php<span class="w"> </span>-v<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
+php<span class="w"> </span>-m<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s1">'^(pdo_mysql|mysqli|apcu|memcached|gd|tidy|intl|bcmath|mbstring|uuid|xml|xsl|Zend OPcache)$'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u
+
+<span class="c1"># PEAR package</span>
+pear<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Text_Password
+
+<span class="c1"># Apache modules</span>
+sudo<span class="w"> </span>apache2ctl<span class="w"> </span>-M<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'rewrite|php'</span>
+
+<span class="c1"># MySQL settings</span>
+mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">"SELECT @@sql_mode, @@log_bin_trust_function_creators;"</span>
+
+<span class="c1"># Services running and enabled at boot</span>
+<span class="k">for</span><span class="w"> </span>s<span class="w"> </span><span class="k">in</span><span class="w"> </span>apache2<span class="w"> </span>mysql<span class="w"> </span>memcached<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$s</span><span class="s2">: </span><span class="k">$(</span>systemctl<span class="w"> </span>is-active<span class="w"> </span><span class="nv">$s</span><span class="k">)</span><span class="s2">, </span><span class="k">$(</span>systemctl<span class="w"> </span>is-enabled<span class="w"> </span><span class="nv">$s</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHP version</td>
+<td><code>PHP 8.3.x</code> (or the version you chose)</td>
+</tr>
+<tr>
+<td>PHP extensions</td>
+<td>All 13 listed: <code>pdo_mysql</code>, <code>mysqli</code>, <code>apcu</code>, <code>memcached</code>, <code>gd</code>, <code>tidy</code>, <code>intl</code>, <code>bcmath</code>, <code>mbstring</code>, <code>uuid</code>, <code>xml</code>, <code>xsl</code>, <code>Zend OPcache</code></td>
+</tr>
+<tr>
+<td>PEAR</td>
+<td><code>Text_Password</code></td>
+</tr>
+<tr>
+<td>Apache modules</td>
+<td><code>rewrite_module</code> and <code>php_module</code></td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td><code>ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</code> and <code>1</code></td>
+</tr>
+<tr>
+<td>Services</td>
+<td><code>apache2</code>, <code>mysql</code> and <code>memcached</code> all <code>active, enabled</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-6-get-the-ihris-434-code">Step 6: Get the iHRIS 4.3.4 code<a class="headerlink" href="#step-6-get-the-ihris-434-code" title="Permanent link">&para;</a></h2>
+<p>Get the code from Launchpad, either with Bazaar or as release tarballs. Both give exactly the same 4.3.4 code. Bazaar also gives you the full history and lets you update with one command.</p>
+<p>Every site needs four parts: <strong>I2CE</strong> (the framework), <strong>ihris-common</strong>, <strong>textlayout</strong> (PDF output) and the product, <strong>ihris-manage</strong>, <strong>ihris-qualify</strong> or <strong>ihris-train</strong>. Use 4.3.4 for all four; don't mix 4.3.4 with 4.3.3 parts.</p>
+<h3 id="option-a-bazaar-recommended">Option A: Bazaar (recommended)<a class="headerlink" href="#option-a-bazaar-recommended" title="Permanent link">&para;</a></h3>
+<p><strong>1. Install Bazaar.</strong> On current Ubuntu this installs Breezy, the maintained successor; the <code>bzr</code> command still works:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bzr
+bzr<span class="w"> </span>version
+</code></pre></div>
+<p><strong>2. Choose a branch.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>What you get</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>4.3.4-release</code></td>
+<td>Exactly the 4.3.4 release</td>
+<td>Production sites</td>
+</tr>
+<tr>
+<td><code>4.3-dev</code> (<code>lp:&lt;project&gt;</code>)</td>
+<td>4.3.4 plus any later fixes</td>
+<td>Development</td>
+</tr>
+<tr>
+<td><code>4.3.3-release</code></td>
+<td>The 2018 release. <strong>Does not run on PHP 8</strong></td>
+<td>Only reproducing an old 4.3.3 site on PHP 7</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. Download the 4.3.4 release.</strong> Add the line for each product you need:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
+<span class="nb">cd</span><span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/i2ce/4.3.4-release<span class="w"> </span>I2CE
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-common/4.3.4-release<span class="w"> </span>ihris-common
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/textlayout/4.3.4-release<span class="w"> </span>textlayout
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-manage/4.3.4-release<span class="w"> </span>ihris-manage
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-qualify/4.3.4-release<span class="w"> </span>ihris-qualify
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-train/4.3.4-release<span class="w"> </span>ihris-train
+</code></pre></div>
+<p>For development, use <code>4.3-dev</code> instead: the same commands with <code>lp:i2ce I2CE</code>, <code>lp:ihris-common</code>, <code>lp:textlayout</code>, <code>lp:ihris-manage</code> and so on, in a folder such as <code>/var/lib/iHRIS/lib/4.3-dev</code>.</p>
+<h3 id="option-b-release-tarballs">Option B: release tarballs<a class="headerlink" href="#option-b-release-tarballs" title="Permanent link">&para;</a></h3>
+<p>Each product has a <code>-full</code> tarball that contains all four parts. Download the one for your product from its Launchpad page (<a href="https://launchpad.net/ihris-manage/+download">Manage</a>, <a href="https://launchpad.net/ihris-qualify/+download">Qualify</a>, <a href="https://launchpad.net/ihris-train/+download">Train</a>), for example:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
+<span class="nb">cd</span><span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
+sudo<span class="w"> </span>wget<span class="w"> </span>https://launchpad.net/ihris-manage/4.3.4/4.3.4/+download/ihris-manage-full-4.3.4.tar.bz2
+sudo<span class="w"> </span>tar<span class="w"> </span>xjf<span class="w"> </span>ihris-manage-full-4.3.4.tar.bz2
+sudo<span class="w"> </span>mv<span class="w"> </span>i2ce<span class="w"> </span>I2CE
+</code></pre></div>
+<p>The tarball unpacks I2CE as lowercase <code>i2ce</code>; the last command renames it so the paths in this guide work. To install a second product next to the first, download its plain tarball (for example <code>ihris-qualify-4.3.4.tar.bz2</code>) into the same folder.</p>
+<h3 id="then-for-either-option">Then, for either option<a class="headerlink" href="#then-for-either-option" title="Permanent link">&para;</a></h3>
+<p><strong>4. Point <code>4.3</code> at your code folder.</strong> The site configuration in Step 7 uses <code>/var/lib/iHRIS/lib/4.3</code>, so link it to the folder that holds the code:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ln<span class="w"> </span>-sfn<span class="w"> </span>/var/lib/iHRIS/lib/4.3.4<span class="w"> </span>/var/lib/iHRIS/lib/4.3<span class="w">     </span><span class="c1"># or .../4.3-dev</span>
+ls<span class="w"> </span>-l<span class="w"> </span>/var/lib/iHRIS/lib/
+</code></pre></div>
+<p><strong>5. Updating later</strong> (Bazaar only):</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
+<span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>I2CE<span class="w"> </span>ihris-common<span class="w"> </span>textlayout<span class="w"> </span>ihris-*<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>bzr<span class="w"> </span>pull<span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre></div>
+<p>After updating, run the site update described in <a href="#upgrading-an-existing-site-to-434">Upgrading an existing site to 4.3.4</a>, below.</p>
+<p><strong>For development</strong>, give your own user ownership of the code, so you can edit it and run <code>bzr</code> without <code>sudo</code>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>:<span class="w"> </span>/var/lib/iHRIS/lib
+</code></pre></div>
+<h2 id="step-7-install-an-ihris-site-blank-site">Step 7: Install an iHRIS site (blank site)<a class="headerlink" href="#step-7-install-an-ihris-site-blank-site" title="Permanent link">&para;</a></h2>
+<p>The paths use the <code>/var/lib/iHRIS/lib/4.3</code> link from Step 6. The commands below install iHRIS Manage; for Qualify or Train, use that product's names from this table everywhere instead:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Manage</th>
+<th>Qualify</th>
+<th>Train</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code folder</td>
+<td><code>ihris-manage</code></td>
+<td><code>ihris-qualify</code></td>
+<td><code>ihris-train</code></td>
+</tr>
+<tr>
+<td>Site folder</td>
+<td><code>/var/lib/iHRIS/sites/manage</code></td>
+<td><code>/var/lib/iHRIS/sites/qualify</code></td>
+<td><code>/var/lib/iHRIS/sites/train</code></td>
+</tr>
+<tr>
+<td>Database and its user</td>
+<td><code>ihris_manage</code></td>
+<td><code>ihris_qualify</code></td>
+<td><code>ihris_train</code></td>
+</tr>
+<tr>
+<td>Site file</td>
+<td><code>iHRIS-Manage-BLANK.xml</code></td>
+<td><code>iHRIS-Qualify-BLANK.xml</code></td>
+<td><code>iHRIS-Train-BLANK.xml</code></td>
+</tr>
+<tr>
+<td>Address</td>
+<td><code>http://&lt;server-ip&gt;/manage</code></td>
+<td><code>http://&lt;server-ip&gt;/qualify</code></td>
+<td><code>http://&lt;server-ip&gt;/train</code></td>
+</tr>
+</tbody>
+</table>
+<p>Several products can run on one server, each with its own site folder and database, sharing the code in <code>/var/lib/iHRIS/lib/4.3</code>.</p>
+<p><strong>1. Create the database and its user.</strong> Choose a password for the <code>ihris_manage</code> user; this guide calls it <strong>DBPASS</strong>. Avoid <code>@</code>, <code>:</code>, <code>/</code>, <code>#</code> and <code>?</code> in it, because it goes inside a connection address in step 4. MySQL 8 needs the user created before privileges are granted:</p>
+<div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">ihris_manage</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'ihris_manage'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'DBPASS'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">ihris_manage</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'ihris_manage'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="p">;</span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+<span class="n">EXIT</span><span class="p">;</span>
+</code></pre></div>
+<p>On PHP 7.2 or 7.3, write <code>IDENTIFIED WITH mysql_native_password BY 'DBPASS'</code> in the <code>CREATE USER</code> line instead (see the note in Step 2).</p>
+<p>iHRIS 4.3 creates MySQL functions while installing; that's why Step 3 set <code>log_bin_trust_function_creators = 1</code>.</p>
+<p><strong>2. Copy the blank site:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/iHRIS/sites
+sudo<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>/var/lib/iHRIS/lib/4.3/ihris-manage/sites/blank<span class="w"> </span>/var/lib/iHRIS/sites/manage
+</code></pre></div>
+<p><strong>3. (Optional) Set the feedback email address.</strong> In <code>/var/lib/iHRIS/sites/manage/iHRIS-Manage-BLANK.xml</code>, find the <code>email</code> configuration and replace <code>root@localhost</code> with your address:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/var/lib/iHRIS/sites/manage/iHRIS-Manage-BLANK.xml
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;configuration</span><span class="w"> </span><span class="na">name=</span><span class="s">"email"</span><span class="w"> </span><span class="na">path=</span><span class="s">"to"</span><span class="w"> </span><span class="na">values=</span><span class="s">"single"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;displayName&gt;</span>Email<span class="w"> </span>Address<span class="nt">&lt;/displayName&gt;</span>
+<span class="w">  </span><span class="nt">&lt;value&gt;</span>you@example.org<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div>
+<p><strong>4. Configure the site.</strong> Edit <code>config.values.php</code>:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/var/lib/iHRIS/sites/manage/pages/config.values.php
+</code></pre></div>
+<p>Set these three lines. Remove the <code>//</code> in front of the last two:</p>
+<div class="highlight"><pre><span></span><code><span class="x">$i2ce_site_i2ce_path = "/var/lib/iHRIS/lib/4.3/I2CE";</span>
+<span class="x">$i2ce_site_dsn = 'mysql://ihris_manage:DBPASS@localhost/ihris_manage';</span>
+<span class="x">$i2ce_site_module_config = "/var/lib/iHRIS/sites/manage/iHRIS-Manage-BLANK.xml";</span>
+</code></pre></div>
+<p>Use the full path rather than the template's default (<code>../../../../I2CE</code>), which assumes a different folder layout. Linux paths are case-sensitive, so the folder must be named <code>I2CE</code> exactly, as created in Step 6.</p>
+<p><strong>5. Publish the site through Apache:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/var/lib/iHRIS/sites/manage/pages<span class="w"> </span>/var/www/html/manage
+</code></pre></div>
+<p><strong>6. (Optional) Clean URLs</strong> (removes <code>index.php</code> from addresses):</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cp<span class="w"> </span>/var/www/html/manage/htaccess.TEMPLATE<span class="w"> </span>/var/www/html/manage/.htaccess
+sudo<span class="w"> </span>nano<span class="w"> </span>/var/www/html/manage/.htaccess
+</code></pre></div>
+<p>Change <code>RewriteBase  /iHRIS/manage</code> to:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">RewriteBase</span><span class="w"> </span><span class="sx">/manage</span>
+</code></pre></div>
+<p><strong>7. Run the installer.</strong> Open <code>http://&lt;server-ip&gt;/manage</code> in a browser and wait while the site sets itself up. The first load builds the database and can take several minutes. Then log in:</p>
+<ul>
+<li><strong>Username:</strong> <code>i2ce_admin</code></li>
+<li><strong>Password:</strong> DBPASS (the database user's password)</li>
+</ul>
+<p><strong>(Optional) phpMyAdmin</strong>, for managing the database in a browser:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>phpmyadmin<span class="w">     </span><span class="c1"># choose apache2 with the spacebar when asked</span>
+</code></pre></div>
+<p>Then open <code>http://&lt;server-ip&gt;/phpmyadmin</code>. Don't install it on a server reachable from the internet unless access to it is restricted.</p>
+<h2 id="upgrading-an-existing-site-to-434">Upgrading an existing site to 4.3.4<a class="headerlink" href="#upgrading-an-existing-site-to-434" title="Permanent link">&para;</a></h2>
+<p>This works for any 4.3 site (4.3.0 to 4.3.3, or <code>4.3-dev</code>). The site's database is updated in place and keeps its data. The examples use Manage; use your product's names from the table in Step 7.</p>
+<p><strong>1. Back up the database and the site folder:</strong></p>
+<div class="highlight"><pre><span></span><code>mysqldump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>--routines<span class="w"> </span>ihris_manage<span class="w"> </span>&gt;<span class="w"> </span>ihris_manage-before-4.3.4.sql
+sudo<span class="w"> </span>tar<span class="w"> </span>czf<span class="w"> </span>manage-site-before-4.3.4.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/iHRIS/sites<span class="w"> </span>manage
+</code></pre></div>
+<p><strong>2. Install the 4.3.4 code</strong> in a new folder, as in Step 6, and point the <code>4.3</code> link at it. If the site's <code>config.values.php</code> points <code>$i2ce_site_i2ce_path</code> somewhere else, change it to <code>/var/lib/iHRIS/lib/4.3/I2CE</code>.</p>
+<p><strong>3. Update the site</strong>, from its <code>pages</code> folder, as the web server user:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/lib/iHRIS/sites/manage/pages
+sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>index.php<span class="w"> </span>--update<span class="o">=</span><span class="m">1</span>
+</code></pre></div>
+<p>It takes a few minutes and ends with <code>Site was succesully updated</code> (spelled that way by iHRIS).</p>
+<p><strong>4. Restart memcached and Apache:</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>memcached<span class="w"> </span>apache2
+</code></pre></div>
+<p><strong>5. Check the site.</strong> Log in, open a person record and run a report. Then restart memcached once more and reload the page: the site should open normally and not ask to be installed.</p>
+<p>To go back to the old version, point the <code>4.3</code> link back to the old code folder and restore the database from the dump.</p>
+<h2 id="running-ihris-in-production">Running iHRIS in production<a class="headerlink" href="#running-ihris-in-production" title="Permanent link">&para;</a></h2>
+<p><strong>Watch the Apache error log.</strong> iHRIS logs every PHP warning and deprecation notice to <code>/var/log/apache2/error.log</code>, with a stack trace, whatever <code>php.ini</code> says. On PHP 8.1 and later that's a lot of lines: on the test server the log reached 10.8 GB and filled the disk. Ubuntu rotates and compresses the Apache logs every day and keeps 14 days (<code>/etc/logrotate.d/apache2</code>); keep that in place, and check free space now and then:</p>
+<div class="highlight"><pre><span></span><code>df<span class="w"> </span>-h<span class="w"> </span>/
+sudo<span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>/var/log/apache2
+</code></pre></div>
+<p><strong>If the disk does fill up</strong>, free space first (for example <code>sudo truncate -s 0 /var/log/apache2/error.log</code>), restart MySQL, Apache and memcached, then check the iHRIS tables, which MySQL may have marked as crashed:</p>
+<div class="highlight"><pre><span></span><code>mysqlcheck<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>--auto-repair<span class="w"> </span>ihris_manage
+</code></pre></div>
+<p><strong>Keep errors off the screen.</strong> In <code>/etc/php/8.3/apache2/php.ini</code>, <code>display_errors</code> must be <code>Off</code>, as it is by default on Ubuntu, so visitors never see file paths or error details.</p>
+<p><strong>Back up the database</strong> regularly with <code>mysqldump --routines</code>, as in the upgrade steps above.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p>Common errors and how to fix them.</p>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MySQL won't start; log shows <code>Error while setting value '…NO_AUTO_CREATE_USER…' to 'sql_mode'</code></td>
+<td><code>NO_AUTO_CREATE_USER</code> was removed in MySQL 8.0</td>
+<td>Remove it from <code>sql-mode.cnf</code> (Step 3)</td>
+</tr>
+<tr>
+<td>MySQL won't start; log mentions <code>query_cache_size</code> or <code>query_cache_limit</code></td>
+<td>The query cache was removed in MySQL 8.0</td>
+<td>Comment those lines out in <code>mysqld.cnf</code> (Step 3)</td>
+</tr>
+<tr>
+<td><code>ERROR 1819: Your password does not satisfy the current policy requirements</code></td>
+<td>The password-strength policy from <code>mysql_secure_installation</code></td>
+<td>Use a stronger password (Step 2)</td>
+</tr>
+<tr>
+<td><code>ERROR 1698: Access denied for user 'root'@'localhost'</code></td>
+<td><code>root</code> still uses <code>auth_socket</code></td>
+<td>Set a password with <code>sudo mysql</code> (Step 2)</td>
+</tr>
+<tr>
+<td><code>ERROR 1064 … near 'identified by'</code> when granting privileges</td>
+<td>MySQL 8.0 removed <code>GRANT … IDENTIFIED BY</code></td>
+<td><code>CREATE USER</code> first, then <code>GRANT</code> (Step 7)</td>
+</tr>
+<tr>
+<td>iHRIS can't create database functions or triggers</td>
+<td><code>log_bin_trust_function_creators</code> is 0, e.g. after a restart</td>
+<td>Add it to <code>ihris.cnf</code> (Step 3)</td>
+</tr>
+<tr>
+<td>Site can't find I2CE, or shows a blank page</td>
+<td>The I2CE folder is lowercase <code>i2ce</code> (tarball, or <code>bzr branch</code> without a folder name), or <code>$i2ce_site_i2ce_path</code> is wrong</td>
+<td>Name the folder <code>I2CE</code> (Step 6) and use <code>/var/lib/iHRIS/lib/4.3/I2CE</code> (Step 7)</td>
+</tr>
+<tr>
+<td><code>Call to undefined function get_magic_quotes_gpc()</code></td>
+<td>iHRIS 4.3.3 or older code on PHP 8</td>
+<td>Use iHRIS 4.3.4 (Step 6, or Upgrading an existing site)</td>
+</tr>
+<tr>
+<td><code>could not find driver</code> or no <code>pdo_mysql</code> in <code>php -m</code></td>
+<td>The PHP MySQL driver isn't installed</td>
+<td><code>sudo apt install php8.3-mysql</code>, then restart Apache</td>
+</tr>
+<tr>
+<td>memcached is <code>inactive</code></td>
+<td>Installed but not started</td>
+<td><code>sudo systemctl enable --now memcached</code></td>
+</tr>
+<tr>
+<td><code>SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client</code></td>
+<td>PHP 7.2 or 7.3 can't use MySQL's default caching_sha2_password</td>
+<td>Create the database user with mysql_native_password (Step 2 note), or use PHP 8.3 or later</td>
+</tr>
+<tr>
+<td>Disk full; MySQL tables marked as crashed</td>
+<td>The Apache error log grew too large</td>
+<td>See Running iHRIS in production</td>
+</tr>
+</tbody>
+</table>
+<p>To see why MySQL fails to start:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mysql<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span><span class="w"> </span>--no-pager
+sudo<span class="w"> </span>tail<span class="w"> </span>-30<span class="w"> </span>/var/log/mysql/error.log
+</code></pre></div>
+<p>After fixing a MySQL config error, clear systemd's failed state before starting again:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>reset-failed<span class="w"> </span>mysql
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mysql
+</code></pre></div>
+<h2 id="coming-from-the-ubuntu-1804-guide">Coming from the Ubuntu 18.04 guide?<a class="headerlink" href="#coming-from-the-ubuntu-1804-guide" title="Permanent link">&para;</a></h2>
+<p>If you set up a server with the earlier <a href="https://ihris-documentation.readthedocs.io/en/latest/docs/installation/linux-ubuntu-installation-supporting-software-18-04.html">Ubuntu 18.04 supporting software guide</a>, these are the settings that differ:</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>18.04 guide</th>
+<th>This guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHP</td>
+<td>7.2, generic <code>php-*</code> packages</td>
+<td>8.3 (or your version), versioned <code>php8.3-*</code> packages</td>
+</tr>
+<tr>
+<td>PHP–MySQL driver</td>
+<td>Installed by <code>tasksel lamp-server</code></td>
+<td>Installed explicitly: <code>php8.3-mysql</code></td>
+</tr>
+<tr>
+<td>MySQL passwords</td>
+<td><code>mysql_native_password</code></td>
+<td>MySQL's default <code>caching_sha2_password</code> (PHP 7.2 and 7.3 need <code>mysql_native_password</code>)</td>
+</tr>
+<tr>
+<td>MySQL query cache</td>
+<td><code>query_cache_limit</code>, <code>query_cache_size</code></td>
+<td>Not set (removed in MySQL 8)</td>
+</tr>
+<tr>
+<td>sql-mode</td>
+<td>Includes <code>NO_AUTO_CREATE_USER</code></td>
+<td>Without it (removed in MySQL 8)</td>
+</tr>
+<tr>
+<td><code>log_bin_trust_function_creators</code></td>
+<td><code>SET GLOBAL</code> (lost on restart)</td>
+<td>Set in a config file</td>
+</tr>
+<tr>
+<td>OPcache</td>
+<td>Includes <code>opcache.fast_shutdown</code></td>
+<td>Without it (removed in PHP 7.2)</td>
+</tr>
+<tr>
+<td><code>4.3</code> code link</td>
+<td>Points to a <code>4.3.0</code> folder that is never created</td>
+<td>Points to the folder that holds the code</td>
+</tr>
+<tr>
+<td>Database user</td>
+<td><code>GRANT … IDENTIFIED BY</code></td>
+<td><code>CREATE USER</code>, then <code>GRANT</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 28, 2026 14:45:04 UTC">October 28, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 IntraHealth International
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/iHRIS/ihris-4-documentation" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
