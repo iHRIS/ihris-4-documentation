@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Installation and administration documentation for iHRIS 4.3 (Manage, Qualify and Train)">
+        <meta name="description" content="Installation and administration documentation for iHRIS 4.3 (Manage, Qualify, Train, Graduate and Retain)">
       
       
         <meta name="author" content="IntraHealth International">
@@ -931,7 +931,7 @@
 
 <h1 id="installing-ihris-434-on-ubuntu">Installing iHRIS 4.3.4 on Ubuntu<a class="headerlink" href="#installing-ihris-434-on-ubuntu" title="Permanent link">&para;</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>This guide installs iHRIS 4.3.4 (Manage, Qualify or Train) on Ubuntu with <strong>Apache 2.4</strong>, <strong>MySQL 8</strong> and <strong>PHP</strong>. iHRIS 4.3.4 runs on <strong>PHP 7.2 to 8.5</strong>, so the steps work on any recent Ubuntu LTS release.</p>
+<p>This guide installs iHRIS 4.3.4 (Manage, Qualify, Train, Graduate or Retain) on Ubuntu with <strong>Apache 2.4</strong>, <strong>MySQL 8</strong> and <strong>PHP</strong>. iHRIS 4.3.4 runs on <strong>PHP 7.2 to 8.5</strong>, so the steps work on any recent Ubuntu LTS release.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>The commands use PHP 8.3.</strong> If you use another PHP version, replace <code>8.3</code> with it everywhere: <code>php8.4-gd</code> instead of <code>php8.3-gd</code>, <code>/etc/php/8.4/</code> instead of <code>/etc/php/8.3/</code>, and so on. <code>php -v</code> shows which version you have.</p>
@@ -1002,7 +1002,7 @@
 </tbody>
 </table>
 <p>To use a PHP version your Ubuntu release doesn't ship (for example PHP 8.3 on 22.04), see Step 1.</p>
-<p><strong>Tested:</strong> iHRIS Manage, Qualify and Train 4.3.4 passed a full test run on PHP 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4 and 8.5, with MySQL 8.0 on Ubuntu 24.04. MySQL 8.4 (Ubuntu 26.04) has not been tested yet.</p>
+<p><strong>Tested:</strong> iHRIS Manage, Qualify, Train, Graduate and Retain 4.3.4 passed a full test run on PHP 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4 and 8.5, with MySQL 8.0 on Ubuntu 24.04. MySQL 8.4 (Ubuntu 26.04) has not been tested yet.</p>
 <h2 id="step-1-install-php-and-apache">Step 1: Install PHP and Apache<a class="headerlink" href="#step-1-install-php-and-apache" title="Permanent link">&para;</a></h2>
 <p>Installing PHP also installs Apache and the Apache PHP module (<code>libapache2-mod-php8.3</code>). Install the MySQL driver at the same time, since iHRIS connects to MySQL through PDO:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
@@ -1174,7 +1174,7 @@ mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </sp
 </table>
 <h2 id="step-6-get-the-ihris-434-code">Step 6: Get the iHRIS 4.3.4 code<a class="headerlink" href="#step-6-get-the-ihris-434-code" title="Permanent link">&para;</a></h2>
 <p>Get the code from Launchpad, either with Bazaar or as release tarballs. Both give exactly the same 4.3.4 code. Bazaar also gives you the full history and lets you update with one command.</p>
-<p>Every site needs four parts: <strong>I2CE</strong> (the framework), <strong>ihris-common</strong>, <strong>textlayout</strong> (PDF output) and the product, <strong>ihris-manage</strong>, <strong>ihris-qualify</strong> or <strong>ihris-train</strong>. Use 4.3.4 for all four; don't mix 4.3.4 with 4.3.3 parts.</p>
+<p>Every site needs four parts: <strong>I2CE</strong> (the framework), <strong>ihris-common</strong>, <strong>textlayout</strong> (PDF output) and the product, <strong>ihris-manage</strong>, <strong>ihris-qualify</strong>, <strong>ihris-train</strong>, <strong>ihris-graduate</strong> or <strong>ihris-retention</strong> (iHRIS Retain). Use 4.3.4 for all four; don't mix 4.3.4 with 4.3.3 parts.</p>
 <h3 id="option-a-bazaar-recommended">Option A: Bazaar (recommended)<a class="headerlink" href="#option-a-bazaar-recommended" title="Permanent link">&para;</a></h3>
 <p><strong>1. Install Bazaar.</strong> On current Ubuntu this installs Breezy, the maintained successor; the <code>bzr</code> command still works:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bzr
@@ -1216,10 +1216,12 @@ sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </
 sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-manage/4.3.4-release<span class="w"> </span>ihris-manage
 sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-qualify/4.3.4-release<span class="w"> </span>ihris-qualify
 sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-train/4.3.4-release<span class="w"> </span>ihris-train
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-graduate/4.3.4-release<span class="w"> </span>ihris-graduate
+sudo<span class="w"> </span>bzr<span class="w"> </span>branch<span class="w"> </span>lp:~intrahealth+informatics/ihris-retention/4.3.4-release<span class="w"> </span>ihris-retention
 </code></pre></div>
-<p>For development, use <code>4.3-dev</code> instead: the same commands with <code>lp:i2ce I2CE</code>, <code>lp:ihris-common</code>, <code>lp:textlayout</code>, <code>lp:ihris-manage</code> and so on, in a folder such as <code>/var/lib/iHRIS/lib/4.3-dev</code>.</p>
+<p>For development, use <code>4.3-dev</code> instead: the same commands with <code>lp:i2ce I2CE</code>, <code>lp:ihris-common</code>, <code>lp:textlayout</code>, <code>lp:ihris-manage</code> and so on, in a folder such as <code>/var/lib/iHRIS/lib/4.3-dev</code>. For Graduate and Retain, use the full branch name (<code>lp:~intrahealth+informatics/ihris-graduate/4.3-dev</code>, and the same for <code>ihris-retention</code>), because <code>lp:ihris-graduate</code> and <code>lp:ihris-retention</code> still point at their old 4.2 and 4.1 branches.</p>
 <h3 id="option-b-release-tarballs">Option B: release tarballs<a class="headerlink" href="#option-b-release-tarballs" title="Permanent link">&para;</a></h3>
-<p>Each product has a <code>-full</code> tarball that contains all four parts. Download the one for your product from its Launchpad page (<a href="https://launchpad.net/ihris-manage/+download">Manage</a>, <a href="https://launchpad.net/ihris-qualify/+download">Qualify</a>, <a href="https://launchpad.net/ihris-train/+download">Train</a>), for example:</p>
+<p>Each product has a <code>-full</code> tarball that contains all four parts. Download the one for your product from its Launchpad page (<a href="https://launchpad.net/ihris-manage/+download">Manage</a>, <a href="https://launchpad.net/ihris-qualify/+download">Qualify</a>, <a href="https://launchpad.net/ihris-train/+download">Train</a>, <a href="https://launchpad.net/ihris-graduate/+download">Graduate</a>, <a href="https://launchpad.net/ihris-retention/+download">Retain</a>), for example:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
 <span class="nb">cd</span><span class="w"> </span>/var/lib/iHRIS/lib/4.3.4
 sudo<span class="w"> </span>wget<span class="w"> </span>https://launchpad.net/ihris-manage/4.3.4/4.3.4/+download/ihris-manage-full-4.3.4.tar.bz2
@@ -1241,49 +1243,65 @@ ls<span class="w"> </span>-l<span class="w"> </span>/var/lib/iHRIS/lib/
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>:<span class="w"> </span>/var/lib/iHRIS/lib
 </code></pre></div>
 <h2 id="step-7-install-an-ihris-site-blank-site">Step 7: Install an iHRIS site (blank site)<a class="headerlink" href="#step-7-install-an-ihris-site-blank-site" title="Permanent link">&para;</a></h2>
-<p>The paths use the <code>/var/lib/iHRIS/lib/4.3</code> link from Step 6. The commands below install iHRIS Manage; for Qualify or Train, use that product's names from this table everywhere instead:</p>
+<p>The paths use the <code>/var/lib/iHRIS/lib/4.3</code> link from Step 6. The commands below install iHRIS Manage; for another product, use that product's names from this table everywhere instead:</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>Manage</th>
-<th>Qualify</th>
-<th>Train</th>
+<th>Product</th>
+<th>Code folder</th>
+<th>Site to copy</th>
+<th>Site file</th>
+<th>Site folder, database and address</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Code folder</td>
+<td>Manage</td>
 <td><code>ihris-manage</code></td>
-<td><code>ihris-qualify</code></td>
-<td><code>ihris-train</code></td>
-</tr>
-<tr>
-<td>Site folder</td>
-<td><code>/var/lib/iHRIS/sites/manage</code></td>
-<td><code>/var/lib/iHRIS/sites/qualify</code></td>
-<td><code>/var/lib/iHRIS/sites/train</code></td>
-</tr>
-<tr>
-<td>Database and its user</td>
-<td><code>ihris_manage</code></td>
-<td><code>ihris_qualify</code></td>
-<td><code>ihris_train</code></td>
-</tr>
-<tr>
-<td>Site file</td>
+<td><code>sites/blank</code></td>
 <td><code>iHRIS-Manage-BLANK.xml</code></td>
-<td><code>iHRIS-Qualify-BLANK.xml</code></td>
-<td><code>iHRIS-Train-BLANK.xml</code></td>
+<td><code>manage</code>, <code>ihris_manage</code></td>
 </tr>
 <tr>
-<td>Address</td>
-<td><code>http://&lt;server-ip&gt;/manage</code></td>
-<td><code>http://&lt;server-ip&gt;/qualify</code></td>
-<td><code>http://&lt;server-ip&gt;/train</code></td>
+<td>Qualify</td>
+<td><code>ihris-qualify</code></td>
+<td><code>sites/blank</code></td>
+<td><code>iHRIS-Qualify-BLANK.xml</code></td>
+<td><code>qualify</code>, <code>ihris_qualify</code></td>
+</tr>
+<tr>
+<td>Train</td>
+<td><code>ihris-train</code></td>
+<td><code>sites/blank</code></td>
+<td><code>iHRIS-Train-BLANK.xml</code></td>
+<td><code>train</code>, <code>ihris_train</code></td>
+</tr>
+<tr>
+<td>Graduate</td>
+<td><code>ihris-graduate</code></td>
+<td><code>sites/blank</code></td>
+<td><code>iHRIS-Graduate-BLANK.xml</code></td>
+<td><code>graduate</code>, <code>ihris_graduate</code></td>
+</tr>
+<tr>
+<td>Retain</td>
+<td><code>ihris-retention</code></td>
+<td><code>sites/Demo</code></td>
+<td><code>iHRIS-Retention-Demo.xml</code></td>
+<td><code>retain</code>, <code>ihris_retain</code></td>
 </tr>
 </tbody>
 </table>
+<p>The site folder is <code>/var/lib/iHRIS/sites/&lt;name&gt;</code>, the database and its user are both <code>ihris_&lt;name&gt;</code>, and the address is <code>http://&lt;server-ip&gt;/&lt;name&gt;</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">iHRIS Retain</p>
+<p>Retain ships only a <code>Demo</code> site, so copy <code>sites/Demo</code> in step 2 (despite the name, it is an empty working site with no sample data). Its site file looks for modules with a relative path that doesn't match this guide's layout, so after copying, open <code>/var/lib/iHRIS/sites/retain/iHRIS-Retention-Demo.xml</code>, find <code>&lt;path name='modules'&gt;</code> near the top and change its value from <code>../../../</code> to <code>/var/lib/iHRIS/lib/4.3/</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;path</span><span class="w"> </span><span class="na">name=</span><span class="s">'modules'</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;value&gt;</span>/var/lib/iHRIS/lib/4.3/<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/path&gt;</span>
+</code></pre></div>
+<p>Retain's Excel import and export need the PHPExcel library, which iHRIS does not include. Without it, Excel import and export are unavailable; everything else works.</p>
+</div>
 <p>Several products can run on one server, each with its own site folder and database, sharing the code in <code>/var/lib/iHRIS/lib/4.3</code>.</p>
 <p><strong>1. Create the database and its user.</strong> Choose a password for the <code>ihris_manage</code> user; this guide calls it <strong>DBPASS</strong>. Avoid <code>@</code>, <code>:</code>, <code>/</code>, <code>#</code> and <code>?</code> in it, because it goes inside a connection address in step 4. MySQL 8 needs the user created before privileges are granted:</p>
 <div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
@@ -1324,7 +1342,7 @@ sudo<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cp<span class="w"> </span>/var/www/html/manage/htaccess.TEMPLATE<span class="w"> </span>/var/www/html/manage/.htaccess
 sudo<span class="w"> </span>nano<span class="w"> </span>/var/www/html/manage/.htaccess
 </code></pre></div>
-<p>Change <code>RewriteBase  /iHRIS/manage</code> to:</p>
+<p>Change the <code>RewriteBase</code> line (the template has a placeholder such as <code>/iHRIS/manage</code>) to:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">RewriteBase</span><span class="w"> </span><span class="sx">/manage</span>
 </code></pre></div>
 <p><strong>7. Run the installer.</strong> Open <code>http://&lt;server-ip&gt;/manage</code> in a browser and wait while the site sets itself up. The first load builds the database and can take several minutes. Then log in:</p>
@@ -1338,6 +1356,7 @@ sudo<span class="w"> </span>nano<span class="w"> </span>/var/www/html/manage/.ht
 <p>Then open <code>http://&lt;server-ip&gt;/phpmyadmin</code>. Don't install it on a server reachable from the internet unless access to it is restricted.</p>
 <h2 id="upgrading-an-existing-site-to-434">Upgrading an existing site to 4.3.4<a class="headerlink" href="#upgrading-an-existing-site-to-434" title="Permanent link">&para;</a></h2>
 <p>This works for any 4.3 site (4.3.0 to 4.3.3, or <code>4.3-dev</code>). The site's database is updated in place and keeps its data. The examples use Manage; use your product's names from the table in Step 7.</p>
+<p>It also works for older <strong>iHRIS Graduate</strong> (4.2) and <strong>iHRIS Retain</strong> (1.2, on iHRIS 4.1) sites: replace the code with 4.3.4 as below, and the update brings the site onto 4.3. For Retain, first change the <code>modules</code> path in the site file as described in Step 7. The update moves Retain's stored multi-select values (intervention pools, scenario interventions, scenario groups and projection access) to text columns so long selections are no longer cut off; their contents are kept.</p>
 <p><strong>1. Back up the database and the site folder:</strong></p>
 <div class="highlight"><pre><span></span><code>mysqldump<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>--routines<span class="w"> </span>ihris_manage<span class="w"> </span>&gt;<span class="w"> </span>ihris_manage-before-4.3.4.sql
 sudo<span class="w"> </span>tar<span class="w"> </span>czf<span class="w"> </span>manage-site-before-4.3.4.tar.gz<span class="w"> </span>-C<span class="w"> </span>/var/lib/iHRIS/sites<span class="w"> </span>manage
@@ -1522,7 +1541,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 28, 2026 14:45:04 UTC">October 28, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 29, 2026 09:11:44 UTC">October 29, 2026</span>
   </span>
 
     
