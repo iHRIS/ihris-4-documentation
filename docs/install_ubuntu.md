@@ -5,6 +5,9 @@
 
 This guide installs iHRIS 4.3.4 (Manage, Qualify, Train, Graduate or Retain) on Ubuntu with **Apache 2.4**, **MySQL 8** and **PHP**. iHRIS 4.3.4 runs on **PHP 7.2 to 8.5**, so the steps work on any recent Ubuntu LTS release.
 
+!!! tip "Quicker on Ubuntu 22.04, 24.04 and 26.04: Ubuntu packages"
+    The iHRIS packages install PHP, Apache, memcached, MySQL and the iHRIS code, and apply the settings from Steps 3 and 4 for you. See [Option C](#option-c-ubuntu-packages) in Step 6, then continue with Step 7.
+
 !!! note
     **The commands use PHP 8.3.** If you use another PHP version, replace `8.3` with it everywhere: `php8.4-gd` instead of `php8.3-gd`, `/etc/php/8.4/` instead of `/etc/php/8.3/`, and so on. `php -v` shows which version you have.
 
@@ -318,7 +321,37 @@ sudo mv i2ce I2CE
 
 The tarball unpacks I2CE as lowercase `i2ce`; the last command renames it so the paths in this guide work. To install a second product next to the first, download its plain tarball (for example `ihris-qualify-4.3.4.tar.bz2`) into the same folder.
 
-### Then, for either option
+### Option C: Ubuntu packages
+
+For Ubuntu 22.04, 24.04 and 26.04. The packages are in the IntraHealth PPA:
+
+```bash
+sudo add-apt-repository ppa:intrahealth+informatics/ihris
+sudo apt update
+sudo apt install ihris-manage        # and/or ihris-qualify, ihris-train
+```
+
+This installs the product with I2CE, iHRIS Common and TextLayout, plus PHP and its extensions, Apache, memcached and MySQL. It also:
+
+- adds the MySQL settings from Step 3 in `/etc/mysql/mysql.conf.d/i2ce.cnf`;
+- adds the PHP settings from Step 4 (APCu, OPcache and, for Ubuntu 26.04, `pcre.jit=0`) in `/etc/php/<version>/mods-available/ihris.ini`;
+- enables Apache's rewrite module.
+
+You still need to set the PHP timezone (Step 4, item 5) and, for clean URLs, `AllowOverride All` (Step 5). MySQL's `root` user still logs in with `sudo mysql`; set a password as in Step 2 if you want one. To use a database on another server, install with `--no-install-recommends` to leave out the local MySQL server.
+
+The code goes in **`/var/lib/iHRIS/releases/4.3`**, with I2CE in a lowercase `i2ce` folder. When you follow Step 7, use these paths instead of `/var/lib/iHRIS/lib/4.3`:
+
+```bash
+sudo cp -R /var/lib/iHRIS/releases/4.3/ihris-manage/sites/blank /var/lib/iHRIS/sites/manage
+```
+
+```php
+$i2ce_site_i2ce_path = "/var/lib/iHRIS/releases/4.3/i2ce";
+```
+
+Skip the rest of Step 6. Updates come with the system's updates (`sudo apt upgrade`); after an iHRIS update, run the site update in [Upgrading an existing site to 4.3.4](#upgrading-an-existing-site-to-434), step 3.
+
+### Then, for Option A or B
 
 **4. Point `4.3` at your code folder.** The site configuration in Step 7 uses `/var/lib/iHRIS/lib/4.3`, so link it to the folder that holds the code:
 
