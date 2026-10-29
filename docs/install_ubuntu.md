@@ -30,7 +30,7 @@ Dates from [PHP supported versions](https://www.php.net/supported-versions.php).
 
 To use a PHP version your Ubuntu release doesn't ship (for example PHP 8.3 on 22.04), see Step 1.
 
-**Tested:** iHRIS Manage, Qualify, Train, Graduate and Retain 4.3.4 passed a full test run on PHP 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4 and 8.5, with MySQL 8.0 on Ubuntu 24.04. MySQL 8.4 (Ubuntu 26.04) has not been tested yet.
+**Tested:** iHRIS Manage, Qualify, Train, Graduate and Retain 4.3.4 passed a full test run on PHP 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4 and 8.5, with MySQL 8.0 on Ubuntu 24.04. Fresh installs (site set-up, log in and the main pages) were also checked on Ubuntu 22.04 with PHP 8.1 (Manage) and on Ubuntu 26.04 with PHP 8.5 and MySQL 8.4 (Manage, Qualify and Train); on 26.04, see the PCRE note in Step 4.
 
 ## Step 1: Install PHP and Apache
 
@@ -181,6 +181,15 @@ opcache.enable_cli=1
 ```
 
 For a development machine, use `opcache.revalidate_freq=2`, so code changes show up within 2 seconds.
+
+!!! warning "Ubuntu 26.04: turn off the PCRE JIT"
+    On Ubuntu 26.04, Apache runs with `MemoryDenyWriteExecute=yes`, so PHP's regular-expression JIT can't get memory. PHP then logs `preg_split(): Allocation of JIT memory failed`, and iHRIS shows a fatal error (`array_key_exists(): Argument #2 ($array) must be of type array, null given`) on every page. Turn the JIT off; regular expressions still work, only slightly slower:
+
+    ```bash
+    echo 'pcre.jit=0' | sudo tee /etc/php/8.5/mods-available/pcre-jit.ini
+    sudo phpenmod pcre-jit
+    sudo systemctl restart apache2
+    ```
 
 **5. Timezone.** PHP uses UTC unless told otherwise, so printed reports, report timestamps and cache times don't match local time. Set your timezone in both `php.ini` files (Apache and command line):
 
@@ -516,6 +525,7 @@ Common errors and how to fix them.
 | `could not find driver` or no `pdo_mysql` in `php -m` | The PHP MySQL driver isn't installed | `sudo apt install php8.3-mysql`, then restart Apache |
 | memcached is `inactive` | Installed but not started | `sudo systemctl enable --now memcached` |
 | `SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client` | PHP 7.2 or 7.3 can't use MySQL's default caching_sha2_password | Create the database user with mysql_native_password (Step 2 note), or use PHP 8.3 or later |
+| Every page shows `array_key_exists(): Argument #2 ($array) must be of type array, null given`; Apache log shows `Allocation of JIT memory failed` | Ubuntu 26.04 runs Apache with `MemoryDenyWriteExecute=yes`, which blocks PHP's PCRE JIT | Set `pcre.jit=0` (Step 4) |
 | Disk full; MySQL tables marked as crashed | The Apache error log grew too large | See Running iHRIS in production |
 
 To see why MySQL fails to start:
